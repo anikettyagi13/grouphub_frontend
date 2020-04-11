@@ -44,7 +44,12 @@ class UserRequests extends React.Component{
         var username = name.split(':')[0];
         var request = name.split(':')[1];
         var choice = name.split(':')[2];
-        var k= name.split(':')[3]
+        var k= name.split(':')[3];
+        var noti = this.state.requests;
+            noti.splice(k,1);
+            this.setState({
+                requests:noti
+            })
         fetch(`https://anikettyagi-api-grouphub.herokuapp.com/api/profile/user/${username}/${request}/${choice}`,{
             method:'GET',
             headers:{
@@ -58,11 +63,7 @@ class UserRequests extends React.Component{
                 throw new Error()
             }
         }).then((data)=>{
-            var noti = this.state.requests;
-            noti.splice(k,1);
-            this.setState({
-                requests:noti
-            })
+            
         }).catch((e)=>{
             this.setState({
                 error:'ERROR... WHILE PROCESSING'

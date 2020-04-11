@@ -42,6 +42,12 @@ class GroupNoti extends React.Component{
         var id = name.split(':')[0];
         var choice = name.split(':')[1];
         var k =name.split(':')[2]
+        
+        var noti = this.state.notification;
+        noti.splice(k,1);
+        this.setState({
+            notification:noti
+        })
             fetch(`https://anikettyagi-api-grouphub.herokuapp.com/api/${window.location.href.split('group/')[1].split('/')[0]}/${id}/request`,{
                 method:"POST",
                 headers:{
@@ -51,11 +57,6 @@ class GroupNoti extends React.Component{
                 body:JSON.stringify({choice})
             }).then((data)=>{
                 if(data.ok){
-                    var noti = this.state.notification;
-                    noti.splice(k,1);
-                    this.setState({
-                        notification:noti
-                    })
                 }else{
                     this.setState({
                         error:"Error while processing the request"

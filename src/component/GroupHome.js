@@ -156,7 +156,11 @@ class GroupHome extends React.Component{
     }
     request(){
         if(this.state.requested=='request'){
-        fetch(`https://anikettyagi-api-grouphub.herokuapp.com/api/group/${window.location.href.split('group/')[1]}/request`,{
+
+            this.setState({
+                requested:'requested'
+            });
+            fetch(`https://anikettyagi-api-grouphub.herokuapp.com/api/group/${window.location.href.split('group/')[1]}/request`,{
             method:"GET",
             headers:{
                 "Content-Type":"application/json"
@@ -169,9 +173,6 @@ class GroupHome extends React.Component{
                 throw new Error();
             }
         }).then((data)=>{
-            this.setState({
-                requested:'requested'
-            })
         }).catch((e)=>{
             this.setState({
                 error:'ERROR... were not able to request'

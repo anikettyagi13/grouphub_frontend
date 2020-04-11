@@ -44,6 +44,11 @@ class GroupRequest extends React.Component{
         var choice = name.split(':')[1];
         var k =name.split(':')[2];
         var user = name.split(':')[3];
+        var noti = this.state.requests;
+                    noti.splice(k,1);
+                    this.setState({
+                        requests:noti
+                    })
             fetch(`https://anikettyagi-api-grouphub.herokuapp.com/api/group/${window.location.href.split('group/')[1].split('/')[0]}/${id}/memberrequest`,{
                 method:"POST",
                 headers:{
@@ -53,11 +58,7 @@ class GroupRequest extends React.Component{
                 body:JSON.stringify({choice,_id:user})
             }).then((data)=>{
                 if(data.ok){
-                    var noti = this.state.requests;
-                    noti.splice(k,1);
-                    this.setState({
-                        requests:noti
-                    })
+                    
                 }else{
                     this.setState({
                         error:"Error while processing the request"
