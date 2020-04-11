@@ -156,7 +156,6 @@ class Profile extends React.Component{
             return res.json();
             }
         }).then((e)=>{
-            console.log(e);
             this.setState({
                 isLoading:false,
                 error:'Error....'
