@@ -153,7 +153,6 @@ class Profile extends React.Component{
             window.location.assign('/login');
         }  
         else{
-            console.log(e);
                 this.setState({
                     error:'ERROR...while processing request'
                 })
