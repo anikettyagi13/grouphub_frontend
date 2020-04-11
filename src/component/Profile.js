@@ -145,7 +145,10 @@ class Profile extends React.Component{
         this.setState({
             isLoading:true
         })
-        fetch('https://anikettyagi-api-grouphub.herokuapp.com/api/logout').then((res)=>{
+        fetch('https://anikettyagi-api-grouphub.herokuapp.com/api/logout',{
+            method:'GET',
+            credentials:'include'
+        }).then((res)=>{
         if(res.ok){
             window.location.assign('/login');
         }  
