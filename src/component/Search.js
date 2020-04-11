@@ -7,7 +7,7 @@ class Search extends React.Component{
     constructor(){
         super()
         this.state={
-            isLoading:false,
+            isLoading:true,
             user:'',
             group:'',
             username:'',
@@ -30,9 +30,9 @@ class Search extends React.Component{
         }).then((res)=>{
             if(res.loggedIn){
                 window.location.assign('/login');
-            
             }else{
             this.setState({
+                isLoading:false,
                 groupnames:res.groupnames,
                 username:res.username
             })
@@ -107,6 +107,7 @@ class Search extends React.Component{
         }
 
         return(
+        <div>{this.state.isLoading?<p className='material'>LOADING...</p>:
             <div className='main_body'>
                 <Header className='header' username={this.state.username}/>
                <div className='body center'>
@@ -128,6 +129,7 @@ class Search extends React.Component{
                 }
                 </div>
             </div>
+            }</div>
         )
     }
 }
