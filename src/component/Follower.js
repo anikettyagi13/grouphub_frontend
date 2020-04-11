@@ -23,12 +23,16 @@ class Follower extends React.Component{
                 throw new Error();
             }
         }).then((data)=>{
+            if(data.loggedIn){
+                    window.location.assign('/login');
+            }
             this.setState({
                 isLoading:false,
                 usernames:data.usernames,
                 username:data.username
             })
         }).catch((e)=>{
+            
             this.setState({
                 isLoading:false,
                 error:true

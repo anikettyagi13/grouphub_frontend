@@ -28,22 +28,30 @@ class PostComments extends React.Component{
             if(res.ok){
                 return res.json();
             }else{
-                this.setState({
-                    isLoading:false,
-                    error:'UNAUTHORIZED'
-                })
+                throw new Error();
             }
         }).then((data)=>{
-            if(data){
-                this.setState({
-                    isLoading:false,
-                    post:data.data.post,
-                    groupnames:data.data.groupnames,
-                    comments:data.data.comments,
-                    applause:data.data.applause,
-                    owner:data.data.owner
-                })
+            if(data.loggedIn){
+                window.location.assign('/login')
+            }else{
+
+                if(data){
+                    this.setState({
+                        isLoading:false,
+                        post:data.data.post,
+                        groupnames:data.data.groupnames,
+                        comments:data.data.comments,
+                        applause:data.data.applause,
+                        owner:data.data.owner
+                    })
+                }
             }
+        }).catch((e)=>{
+            this.setState({
+                isLoading:false,
+                error:'UNAUTHORIZED'
+            })
+
         })
     }
     handleChange(event){

@@ -36,34 +36,37 @@ class Home extends React.Component{
                 throw new Error();
             }
         }).then((data)=>{
-            var posts = this.state.posts;
-            posts.push(...data.posts);
-            if(data.posts.length>0||this.state.limit===1){
-                this.setState({
-                    isLoading:false,
-                    posts:posts,
-                    username:data.username,
-                    groupnames:data.groupnames
-                },()=>{
-                    if(this.state.posts.length<6){
-                        this.state.limit+=1;
-                        if(this.state.limit===5){
-                            this.state.notMore=true;
-                        }
-                        this.componentDidMount();
-                    }
-                })
+            if(data.loggedIn){
+                window.location.assign('/login');
             }else{
-                if(this.state.limit===5){
+                var posts = this.state.posts;
+                posts.push(...data.posts);
+                if(data.posts.length>0||this.state.limit===1){
                     this.setState({
-                        notMore:true
+                        isLoading:false,
+                        posts:posts,
+                        username:data.username,
+                        groupnames:data.groupnames
+                    },()=>{
+                        if(this.state.posts.length<6){
+                            this.state.limit+=1;
+                            if(this.state.limit===5){
+                                this.state.notMore=true;
+                            }
+                            this.componentDidMount();
+                        }
                     })
+                }else{
+                    if(this.state.limit===5){
+                        this.setState({
+                            notMore:true
+                        })
+                    }
+                    this.state.limit+=1;
+                    this.componentDidMount();
                 }
-                this.state.limit+=1;
-                this.componentDidMount();
             }
-            
-        }).catch(()=>{
+        }).catch((e)=>{
             this.setState({
                 error:'ERROR... while handling the request'
             })

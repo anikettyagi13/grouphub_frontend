@@ -24,12 +24,17 @@ class GroupNoti extends React.Component{
                 throw new Error()
             }
         }).then((data)=>{
-            if(data.notifications){
-            this.setState({
-                isLoading:false,
-                notification:data.notifications
-            })
-        }
+            if(data.loggedIn){
+                window.location.assign('/login')
+            }else{
+
+                if(data.notifications){
+                    this.setState({
+                        isLoading:false,
+                        notification:data.notifications
+                    })
+                }
+            }
         }).catch(()=>{
             this.setState({
                 error:'ERROR... only leader and council of leaders are permitted to view notifications'

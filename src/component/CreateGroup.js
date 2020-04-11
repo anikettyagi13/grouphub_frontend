@@ -25,6 +25,9 @@ class CreateGroup extends React.Component{
                 return response.json()
             }
         }).then((data)=>{
+            if(data.loggedIn){
+                window.location.assign('/login');
+            }
             this.setState({
                 isLoading:false,
                 groupnames:data.groupnames,

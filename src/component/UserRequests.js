@@ -26,12 +26,18 @@ class UserRequests extends React.Component{
                 throw new Error()
             }
         }).then((data)=>{
+            if(data.loggedIn){
+                window.location.assign('/login');
+            
+            }else{
             this.setState({
                 isLoading:false,
                 username:data.user,
                 requests:data.requests
             })
+        }
         }).catch((e)=>{
+            
             this.setState({
                 isLoading:false,
                 error:'ERROR... while processing the request'

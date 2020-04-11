@@ -29,6 +29,9 @@ class Profile extends React.Component{
             }).then((response)=>{
             return response.json();
         }).then((response)=>{
+            if(response.loggedIn){
+                window.location.assign('/login');
+            }else{
             if(response.user.requests){
                 this.setState({
                     isLoading:false,
@@ -65,7 +68,11 @@ class Profile extends React.Component{
                     request:response.request
                 })
             }
-        })
+        }
+    }
+    )
+
+
     }
 
     // scroll(event){
@@ -92,6 +99,7 @@ class Profile extends React.Component{
                 }
             }).then((data)=>{
             }).catch((e)=>{
+                
                 this.setState({
                     error:'ERROR... while handling the request'
                 })

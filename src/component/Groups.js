@@ -23,11 +23,15 @@ class Groups extends React.Component{
                 throw new Error();
             }
         }).then((data)=>{
-            this.setState({
-                isLoading:false,
-                groupnames:data.groupnames,
-                username:data.username
-            })
+            if(data.loggedIn){
+                window.location.assign('/login');
+            }else{
+                this.setState({
+                    isLoading:false,
+                    groupnames:data.groupnames,
+                    username:data.username
+                })
+            }
         }).catch((e)=>{
             this.setState({
                 isLoading:false,

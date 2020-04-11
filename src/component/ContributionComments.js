@@ -28,12 +28,12 @@ class ContributionComments extends React.Component{
             if(res.ok){
                 return res.json();
             }else{
-                this.setState({
-                    isLoading:false,
-                    error:'UNAUTHORIZED'
-                })
+                throw new Error();
             }
         }).then((data)=>{
+            if(data.loggedIn){
+                window.location.assign('/login');
+            }
             if(data){
                 this.setState({
                     isLoading:false,
@@ -43,6 +43,11 @@ class ContributionComments extends React.Component{
                     comments:data.comments
                 })
             }
+        }).catch((e)=>{
+            this.setState({
+                isLoading:false,
+                error:'UNAUTHORIZED'
+            })
         })
     }
     handleChange(event){

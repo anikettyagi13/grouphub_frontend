@@ -25,12 +25,16 @@ class GroupRequest extends React.Component{
                 throw new Error()
             }
         }).then((data)=>{
-            if(data.requests){
-            this.setState({
-                isLoading:false,
-                requests:data.requests
-            })
-        }
+            if(data.loggedIn){
+                window.location.assign('/login');
+            }else{
+                if(data.requests){
+                    this.setState({
+                        isLoading:false,
+                        requests:data.requests
+                    })
+                }
+            }
         }).catch(()=>{
             this.setState({
                 error:'ERROR... only leader and council of leaders are permitted to view member requests'

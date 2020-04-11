@@ -24,12 +24,19 @@ class Search extends React.Component{
         fetch('https://anikettyagi-api-grouphub.herokuapp.com/api/search',{
             credentials:'include'
         }).then((data)=>{
+            if(data.ok){
             return data.json();
+            }
         }).then((res)=>{
+            if(res.loggedIn){
+                window.location.assign('/login');
+            
+            }else{
             this.setState({
                 groupnames:res.groupnames,
                 username:res.username
             })
+        }
         })
     }
     change(event){
