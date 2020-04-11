@@ -8,6 +8,7 @@ class Search extends React.Component{
         super()
         this.state={
             isLoading:true,
+            userLoading:false,
             user:'',
             group:'',
             username:'',
@@ -58,7 +59,7 @@ class Search extends React.Component{
         var name=event.target.name;
         if(name=="user"){
             this.setState({
-                isLoading:true,
+                userLoading:true,
                 user:event.target.value
             })
             var user =event.target.value;
@@ -66,19 +67,19 @@ class Search extends React.Component{
             socket.on('searchUser',(users)=>{
                 this.setState({
                     users:users,
-                    isLoading:false
+                    userLoading:false
                 })
             })
         }else{
             this.setState({
-                isLoading:true,
+                userLoading:true,
                 group:event.target.value
             })
             socket.emit("Searchgroup",event.target.value)
             socket.on('searchGroup',(groups)=>{
                 this.setState({
                     groups:groups,
-                    isLoading:false
+                    userLoading:false
                 })
             })
         }
@@ -115,14 +116,14 @@ class Search extends React.Component{
                     {this.state.userButton?
                     <div>
                         <input name="user" type="text" placeholder=" Search user" value={this.state.user} onChange={this.handleChange}></input>
-                        {this.state.isLoading?<p className='material'>LOADING...</p>:
+                        {this.state.userLoading?<p className='material'>LOADING...</p>:
                             <div className='searched'>{users}</div>
                         }
                     </div>               
                 :
                     <div>
                         <input name="group" type="text" placeholder="group" value={this.state.group} onChange={this.handleChange}></input>
-                        {this.state.isLoading?<p className='material'>LOADING...</p>:
+                        {this.state.userLoading?<p className='material'>LOADING...</p>:
                             <div className='searched' >{groups}</div>
                         }
                     </div>
