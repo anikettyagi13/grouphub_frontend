@@ -38,7 +38,7 @@ class Home extends React.Component{
         }).then((data)=>{
             var posts = this.state.posts;
             posts.push(...data.posts);
-            if(data.posts.length>0){
+            if(data.posts.length>0||this.state.limit===1){
                 this.setState({
                     isLoading:false,
                     posts:posts,
@@ -77,7 +77,7 @@ class Home extends React.Component{
         var username = name.split(':')[3]
         if(applaused=='applause'){
             var posts =this.state.posts;
-        posts[k].applaused = 'applaused' ;
+        posts[k].applaused = 'applaused';
         posts[k].applause +=1;
         this.setState({
             posts:posts
