@@ -153,10 +153,14 @@ class Profile extends React.Component{
             window.location.assign('/login');
         }  
         else{
-                this.setState({
-                    error:'ERROR...while processing request'
-                })
+            return res.json();
             }
+        }).then((e)=>{
+            console.log(e);
+            this.setState({
+                isLoading:false,
+                error:'Error....'
+            })
         })
     }
     render(){
