@@ -27,12 +27,14 @@ class CreateGroup extends React.Component{
         }).then((data)=>{
             if(data.loggedIn){
                 window.location.assign('/login');
+            }else{
+
+                this.setState({
+                    isLoading:false,
+                    groupnames:data.groupnames,
+                    username:data.username
+                })
             }
-            this.setState({
-                isLoading:false,
-                groupnames:data.groupnames,
-                username:data.username
-            })
         })
     }
     handleChange(event){

@@ -17,6 +17,7 @@ class Profile extends React.Component{
             error:'',
             requests:''
         }
+        this.logout = this.logout.bind(this);
         // this.scroll = this.scroll.bind(this);
         this.request = this.request.bind(this);
         this.increase = this.increase.bind(this);
@@ -140,6 +141,15 @@ class Profile extends React.Component{
         })
     }
     }
+    logout(){
+        fetch('https://anikettyagi-api-grouphub.herokuapp.com/api/logout').then((res)=>{
+            if(!res.ok){
+                this.setState({
+                    error:'ERROR...while processing request'
+                })
+            }
+        })
+    }
     render(){
         var posts=[];
         var groupname=[];
@@ -180,9 +190,9 @@ class Profile extends React.Component{
         })
     }
         return(
-        <div>{this.state.isLoading?<p>LOADING....</p>:
+        <div>{this.state.isLoading?<p className='material'>LOADING....</p>:
         <div>
-            {this.state.error?<p>{this.state.error}</p>:
+            {this.state.error?<p className='error'>{this.state.error}</p>:
         <div className='main_body'>
             <Header username={this.state.username} className='header'></Header>
         <div className='body body1'>
@@ -196,6 +206,7 @@ class Profile extends React.Component{
             {this.state.requests?
             <div>
             <a href="/post" className='material'>POST</a>
+            <a href='/login' className='material' onClick={this.logout}>LOGOUT</a>
             </div>
             :null}
             {this.state.request?<button onClick={this.request} className='posting_button'>{this.state.request}</button>:
