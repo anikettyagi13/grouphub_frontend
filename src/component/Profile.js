@@ -219,12 +219,11 @@ class Profile extends React.Component{
             <div>
             <a href="/post" className='material'>POST</a>
             <br></br>
-            <br></br>
-            <a className='material' onClick={this.logout}>LOGOUT</a>
             </div>
             :null}
             {this.state.request?<button onClick={this.request} className='posting_button'>{this.state.request}</button>:
             <div>
+            <a className='material' onClick={this.logout}>LOGOUT</a>
             <div>
                 <p>{this.state.user}</p>
                 <div >{posts}</div>
