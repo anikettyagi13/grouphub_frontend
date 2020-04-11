@@ -75,11 +75,10 @@ class Profile extends React.Component{
     request(event){
         if(this.state.request=='request'){
 
-            if(data.requested){
                 this.setState({
                     request:'requested'
                 })
-            }            fetch(`https://anikettyagi-api-grouphub.herokuapp.com/api/profile/${window.location.href.split('profile/')[1].split('/')[0]}/request`,{
+               fetch(`https://anikettyagi-api-grouphub.herokuapp.com/api/profile/${window.location.href.split('profile/')[1].split('/')[0]}/request`,{
                 method:'GET',
                 credentials:'include',
                 headers:{
