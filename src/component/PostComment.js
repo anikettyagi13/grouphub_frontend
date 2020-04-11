@@ -80,7 +80,14 @@ class PostComments extends React.Component{
         var comment = name.split(':')[0];
         var applaused = name.split(':')[1];
         var k = name.split(':')[2];
+        
         if(applaused=='applause'){
+            var comments = this.state.comments
+        comments[k].applause+=1;
+        comments[k].applaused='applaused'
+        this.setState({
+            comments
+        })
             fetch(`https://anikettyagi-api-grouphub.herokuapp.com/api/profile/${window.location.href.split("profile/")[1].split("/")[0]}/${window.location.href.split('profile/')[1].split('/')[1]}/${comment}/increase`,{
                 method:'GET',
                 credentials:'include',
@@ -89,12 +96,6 @@ class PostComments extends React.Component{
                 }
             }).then((res)=>{
                 if(res.ok){
-                    var comments = this.state.comments
-                    comments[k].applause+=1;
-                    comments[k].applaused='applaused'
-                    this.setState({
-                        comments
-                    })
                 }else{
                     this.setState({
                         error:'Error.. while processing request'

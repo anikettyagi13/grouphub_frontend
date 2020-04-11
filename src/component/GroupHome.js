@@ -130,7 +130,14 @@ class GroupHome extends React.Component{
         var contribution = name.split(':')[0];
         var applause = name.split(':')[1];
         var k= name.split(':')[2];
+        
         if(applause=='applause'){
+            var contributions=this.state.contributions;
+        contributions[k].applaused='applaused'
+        contributions[k].applause+=1;
+        this.setState({
+            contributions
+        })
             fetch(`https://anikettyagi-api-grouphub.herokuapp.com/api/group/${window.location.href.split('group/')[1].split('/')[0]}/${contribution}/increase`,{
                 method:'GET',
                 credentials:'include',
@@ -139,12 +146,6 @@ class GroupHome extends React.Component{
                 }
             }).then((res)=>{
                 if(res.ok){
-                    var contributions=this.state.contributions;
-                    contributions[k].applaused='applaused'
-                    contributions[k].applause+=1;
-                    this.setState({
-                        contributions
-                    })
                 }else{
                     this.setState({
                         error:'ERROR.. in handling the problem'

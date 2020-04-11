@@ -77,7 +77,13 @@ class ContributionComments extends React.Component{
         var comment = name.split(':')[0];
         var applause = name.split(':')[1];
         var k = name.split(':')[2];
-        if(applause=='applause'){
+        if(applause=='applause'){        
+        var comments = this.state.comments;
+        comments[k].applause+=1;
+        comments[k].applaused='applaused';
+        this.setState({
+            comments:comments
+        })
             fetch(`https://anikettyagi-api-grouphub.herokuapp.com/api/group/${window.location.href.split('group/')[1].split('/')[0]}/${window.location.href.split('group/')[1].split('/')[1]}/${comment}/increase`,{
                  method:'GET',
                  credentials:'include',
@@ -86,12 +92,6 @@ class ContributionComments extends React.Component{
                  }
             }).then((res)=>{
                 if(res.ok){
-                    var comments = this.state.comments;
-                    comments[k].applause+=1;
-                    comments[k].applaused='applaused';
-                    this.setState({
-                        comments:comments
-                    })
                 }else{
                     throw new Error();
                 }

@@ -105,7 +105,14 @@ class Profile extends React.Component{
         var post = name.split(':')[0];
         var applaused =name.split(':')[1];
         var k = name.split(':')[2];
+        
         if(applaused=="applause"){
+            var posts =this.state.posts;
+        posts[k].applaused = 'applaused' ;
+        posts[k].applause +=1;
+        this.setState({
+            posts:posts
+        })
         fetch(`https://anikettyagi-api-grouphub.herokuapp.com/api/${window.location.href.split('profile/')[1]}/post/${post}/increase`,{
             method:'GET',
             credentials:'include',
@@ -119,12 +126,6 @@ class Profile extends React.Component{
                 throw new Error()
             }
         }).then((data)=>{
-            var posts =this.state.posts;
-            posts[k].applaused = 'applaused' ;
-            posts[k].applause +=1;
-            this.setState({
-                posts:posts
-            })
         }).catch((e)=>{
             this.setState({
                 error:'ERROR...while processing request'

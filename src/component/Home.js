@@ -76,6 +76,12 @@ class Home extends React.Component{
         var k = name.split(':')[2];
         var username = name.split(':')[3]
         if(applaused=='applause'){
+            var posts =this.state.posts;
+        posts[k].applaused = 'applaused' ;
+        posts[k].applause +=1;
+        this.setState({
+            posts:posts
+        });
             if(name.split(':')[4]){
             fetch(`https://anikettyagi-api-grouphub.herokuapp.com/api/group/${name.split(':')[4]}/${id}/increase`,{
                 method:'GET',
@@ -111,12 +117,6 @@ class Home extends React.Component{
                         throw new Error()
                     }
                 }).then((data)=>{
-                    var posts =this.state.posts;
-                    posts[k].applaused = 'applaused' ;
-                    posts[k].applause +=1;
-                    this.setState({
-                        posts:posts
-                    })
                 }).catch((e)=>{
                     this.setState({
                         error:'ERROR...while processing request'
