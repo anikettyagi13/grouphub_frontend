@@ -142,8 +142,14 @@ class Profile extends React.Component{
     }
     }
     logout(){
+        this.setState({
+            isLoading:true
+        })
         fetch('https://anikettyagi-api-grouphub.herokuapp.com/api/logout').then((res)=>{
-            if(!res.ok){
+        if(res.ok){
+            window.location.assign('/login');
+        }  
+        else{
                 this.setState({
                     error:'ERROR...while processing request'
                 })
@@ -206,7 +212,9 @@ class Profile extends React.Component{
             {this.state.requests?
             <div>
             <a href="/post" className='material'>POST</a>
-            <a href='/login' className='material' onClick={this.logout}>LOGOUT</a>
+            <br></br>
+            <br></br>
+            <a className='material' onClick={this.logout}>LOGOUT</a>
             </div>
             :null}
             {this.state.request?<button onClick={this.request} className='posting_button'>{this.state.request}</button>:
